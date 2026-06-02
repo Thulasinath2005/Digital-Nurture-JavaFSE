@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Conditionals & Loops - Community Portal</title>
+  <style>
+    body { font-family: Arial, sans-serif; padding: 20px; background: #f0f4f8; }
+    .container { background: white; padding: 25px; border-radius: 8px; max-width: 600px; margin: 0 auto; }
+    h2 { color: #2c3e50; }
+    .event-card { padding: 15px; border: 1px solid #ddd; border-radius: 8px; margin: 10px 0; }
+    .event-card.available { border-left: 4px solid #27ae60; }
+    .event-card.full      { border-left: 4px solid #e74c3c; opacity: 0.6; }
+    .event-card.past      { border-left: 4px solid #95a5a6; opacity: 0.5; }
+    .badge { display: inline-block; padding: 3px 10px; border-radius: 12px; font-size: 12px; font-weight: bold; }
+    .badge.open     { background: #d5f5e3; color: #1e8449; }
+    .badge.full     { background: #fadbd8; color: #922b21; }
+    .badge.past     { background: #eaecee; color: #566573; }
+    .error-msg { color: #e74c3c; background: #fadbd8; padding: 10px; border-radius: 5px; margin-top: 10px; }
+    button { padding: 8px 16px; background: #2980b9; color: white; border: none; border-radius: 5px; cursor: pointer; margin-top: 5px; font-size: 13px; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2>Exercise 3: Conditionals, Loops & Error Handling</h2>
+    <div id="eventList"></div>
+  </div>
+
+  <script>
+    const today = new Date();
+
+    // Event data array
+    const events = [
+      { id: 1, name: "🎵 Music Festival",   date: new Date("2025-06-15"), seats: 10 },
+      { id: 2, name: "💻 Tech Meetup",      date: new Date("2025-06-22"), seats: 0  },
+      { id: 3, name: "🎨 Art Exhibition",   date: new Date("2024-07-05"), seats: 5  },
+      { id: 4, name: "🍕 Food Fair",        date: new Date("2025-07-12"), seats: 30 },
+    ];
+
+    const container = document.getElementById('eventList');
+
+    // Loop through events using forEach
+    events.forEach(event => {
+      const isPast  = event.date < today;
+      const isFull  = event.seats === 0;
+
+      // if-else: hide past or full events (show with reduced visibility)
+      let cardClass = 'event-card available';
+      let badgeClass = 'badge open';
+      let badgeText = `${event.seats} seats left`;
+
+      if (isPast) {
+        cardClass = 'event-card past';
+        badgeClass = 'badge past';
+        badgeText = 'Past Event';
+      } else if (isFull) {
+        cardClass = 'event-card full';
+        badgeClass = 'badge full';
+        badgeText = 'Fully Booked';
+      }
+
+      const card = document.createElement('div');
+      card.className = cardClass;
+      card.innerHTML = `
+        <strong>${event.name}</strong> — ${event.date.toDateString()}
+        <span class="${badgeClass}">${badgeText}</span>
+        ${!isPast && !isFull ? `<br><button onclick="register(${event.id})">Register</button>` : ''}
+        <div id="msg-${event.id}"></div>
+      `;
+      container.appendChild(card);
+    });
+
+    // try-catch: handle registration errors
+    function register(id) {
+      try {
+        const event = events.find(e => e.id === id);
+        if (!event) throw new Error("Event not found!");
+        if (event.seats <= 0) throw new Error("No seats available!");
+        event.seats--;
+        document.getElementById(`msg-${id}`).innerHTML =
+          `<span style="color:green;">✅ Registered! ${event.seats} seats remaining.</span>`;
+      } catch (err) {
+        document.getElementById(`msg-${id}`).innerHTML =
+          `<span class="error-msg">❌ Error: ${err.message}</span>`;
+      }
+    }
+  </script>
+</body>
+</html>

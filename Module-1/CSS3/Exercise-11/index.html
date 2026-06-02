@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CSS Debugging Demo - Community Portal</title>
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: Arial, sans-serif; background: #f0f4f8; padding: 20px; }
+
+    .container { max-width: 800px; margin: 0 auto; }
+
+    header {
+      background: #2c3e50; color: white;
+      padding: 20px; border-radius: 8px; margin-bottom: 20px;
+      text-align: center;
+    }
+
+    .debug-instructions {
+      background: #fff3cd;
+      border-left: 4px solid #ffc107;
+      padding: 15px;
+      border-radius: 6px;
+      margin-bottom: 20px;
+    }
+    .debug-instructions h3 { color: #856404; margin-bottom: 8px; }
+    .debug-instructions li  { color: #555; font-size: 14px; margin: 5px 0 5px 20px; }
+
+    /* INTENTIONAL BUG: incorrect font-size unit causes overflow */
+    .bugged-card {
+      background: white;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+      margin-bottom: 15px;
+      /* Bug: uncomment below in DevTools to see the fix */
+      /* overflow: hidden; */
+    }
+
+    .bugged-card h3 { color: #e74c3c; margin-bottom: 8px; }
+    .bugged-card p  { font-size: 14px; color: #555; line-height: 1.6; }
+
+    /* Cards that look correct */
+    .fixed-card {
+      background: white;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+      margin-bottom: 15px;
+      overflow: hidden;
+    }
+    .fixed-card h3 { color: #27ae60; margin-bottom: 8px; }
+    .fixed-card p  { font-size: 14px; color: #555; line-height: 1.6; }
+
+    /* Responsive test section */
+    @media (max-width: 600px) {
+      header h1 { font-size: 20px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+
+    <header>
+      <h1>🔍 CSS Debugging Exercise</h1>
+      <p>Use Chrome DevTools to inspect and fix layout issues</p>
+    </header>
+
+    <div class="debug-instructions">
+      <h3>📋 DevTools Tasks:</h3>
+      <ol>
+        <li>Press <strong>F12</strong> to open DevTools</li>
+        <li>Use the <strong>Device Toolbar</strong> (Ctrl+Shift+M) to simulate mobile screens</li>
+        <li>In <strong>Elements</strong> tab, select the red card and tweak its styles live</li>
+        <li>In <strong>Network</strong> tab, verify <code>styles.css</code> loads with status 200</li>
+        <li>Try disabling/enabling CSS rules in the Styles panel</li>
+        <li>Use <strong>Computed</strong> tab to see the actual box model of each element</li>
+      </ol>
+    </div>
+
+    <!-- Card with intentional issue to fix via DevTools -->
+    <div class="bugged-card">
+      <h3>⚠️ Layout Issue Card (Fix me with DevTools!)</h3>
+      <p>This card has missing overflow handling. In DevTools → Elements → Styles, try adding <code>overflow: hidden</code> to fix any content that bleeds out.</p>
+    </div>
+
+    <!-- Correct card for comparison -->
+    <div class="fixed-card">
+      <h3>✅ Correct Card</h3>
+      <p>This card is correctly styled with overflow control, proper padding and margin. Compare its styles with the card above in DevTools.</p>
+    </div>
+
+  </div>
+</body>
+</html>

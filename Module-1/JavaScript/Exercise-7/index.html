@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>DOM Manipulation - Community Portal</title>
+  <style>
+    body { font-family: Arial, sans-serif; padding: 20px; background: #f0f4f8; }
+    h2 { color: #2c3e50; }
+    .events-grid { display: flex; flex-wrap: wrap; gap: 15px; margin-top: 15px; }
+    .event-card {
+      background: white; border-radius: 10px; padding: 20px;
+      width: 220px; box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+      border-top: 4px solid #2980b9;
+    }
+    .event-card h3 { font-size: 15px; color: #2c3e50; margin-bottom: 8px; }
+    .event-card p  { font-size: 13px; color: #666; }
+    .event-card .seats { font-weight: bold; color: #27ae60; margin: 8px 0; }
+    .event-card button {
+      padding: 6px 14px; font-size: 13px; border: none; border-radius: 5px;
+      cursor: pointer; margin-right: 5px; margin-top: 5px;
+    }
+    .btn-reg    { background: #27ae60; color: white; }
+    .btn-cancel { background: #e74c3c; color: white; }
+    .registered { border-top-color: #27ae60; background: #f0fff4; }
+  </style>
+</head>
+<body>
+  <h2>Exercise 7: DOM Manipulation</h2>
+  <p>Events are dynamically rendered using JavaScript.</p>
+
+  <div class="events-grid" id="eventsGrid"></div>
+
+  <script>
+    const events = [
+      { id: 1, name: "🎵 Music Festival", date: "June 15",  seats: 20, registered: false },
+      { id: 2, name: "💻 Tech Meetup",    date: "June 22",  seats: 15, registered: false },
+      { id: 3, name: "🎨 Art Exhibition", date: "July 5",   seats: 10, registered: false },
+      { id: 4, name: "🍕 Food Fair",      date: "July 12",  seats: 30, registered: false },
+    ];
+
+    function renderEvents() {
+      
+      const grid = document.querySelector('#eventsGrid');
+      grid.innerHTML = '';
+
+      events.forEach(ev => {
+        // Create elements with createElement
+        const card = document.createElement('div');
+        card.className = 'event-card' + (ev.registered ? ' registered' : '');
+        card.id = `card-${ev.id}`;
+
+        card.innerHTML = `
+          <h3>${ev.name}</h3>
+          <p>📅 ${ev.date}</p>
+          <p class="seats">Seats: ${ev.seats}</p>
+          ${ev.registered
+            ? `<button class="btn-cancel" onclick="cancelReg(${ev.id})">❌ Cancel</button>`
+            : `<button class="btn-reg" onclick="registerEv(${ev.id})">✅ Register</button>`
+          }
+        `;
+
+        // Append to grid
+        grid.appendChild(card);
+      });
+    }
+
+    function registerEv(id) {
+      const ev = events.find(e => e.id === id);
+      if (ev.seats > 0) {
+        ev.seats--;
+        ev.registered = true;
+        renderEvents();  // re-render to update UI
+      }
+    }
+
+    function cancelReg(id) {
+      const ev = events.find(e => e.id === id);
+      ev.seats++;
+      ev.registered = false;
+      renderEvents();
+    }
+
+    renderEvents(); 
+  </script>
+</body>
+</html>

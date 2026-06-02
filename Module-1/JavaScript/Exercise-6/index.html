@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Arrays & Methods - Community Portal</title>
+  <style>
+    body { font-family: Arial, sans-serif; padding: 20px; background: #f0f4f8; }
+    .container { background: white; padding: 25px; border-radius: 8px; max-width: 600px; margin: 0 auto; }
+    h2 { color: #2c3e50; }
+    input { padding: 8px; border: 1px solid #ccc; border-radius: 5px; width: 200px; }
+    button { padding: 8px 16px; background: #2980b9; color: white; border: none; border-radius: 5px; cursor: pointer; margin: 5px; }
+    .event-card { display: inline-block; background: #eaf6ff; border-radius: 8px; padding: 12px 18px; margin: 8px; font-size: 14px; border-left: 4px solid #2980b9; }
+    h3 { color: #2980b9; margin-top: 20px; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2>Exercise 6: Arrays & Methods</h2>
+
+    <h3>➕ Add Event (.push)</h3>
+    <input type="text" id="newEvent" placeholder="Event name, e.g. Jazz Night">
+    <select id="newCat">
+      <option value="Music">Music</option>
+      <option value="Tech">Tech</option>
+      <option value="Art">Art</option>
+    </select>
+    <button onclick="addEvent()">Add</button>
+
+    <h3>🔍 Filter: Show only Music events (.filter)</h3>
+    <button onclick="showMusic()">Show Music Events</button>
+    <button onclick="showAll()">Show All</button>
+
+    <div id="eventCards"></div>
+  </div>
+
+  <script>
+    let events = [
+      { name: "Music Festival", category: "Music" },
+      { name: "Tech Meetup",    category: "Tech"  },
+      { name: "Art Exhibition", category: "Art"   },
+      { name: "Jazz Night",     category: "Music" },
+    ];
+
+    function renderCards(list) {
+      // .map() to format display cards
+      const cards = list.map(e => `<div class="event-card">🎫 ${e.category} — ${e.name}</div>`);
+      document.getElementById('eventCards').innerHTML = cards.join('');
+    }
+
+    function addEvent() {
+      const name = document.getElementById('newEvent').value.trim();
+      const category = document.getElementById('newCat').value;
+      if (!name) return;
+      events.push({ name, category });        // .push() to add
+      document.getElementById('newEvent').value = '';
+      renderCards(events);
+    }
+
+    function showMusic() {
+      const musicEvents = events.filter(e => e.category === 'Music');  // .filter()
+      renderCards(musicEvents);
+    }
+
+    function showAll() { renderCards(events); }
+
+    renderCards(events);
+  </script>
+</body>
+</html>

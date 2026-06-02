@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Welcome Banner - Community Portal</title>
+  <style>
+    body { font-family: Arial, sans-serif; margin: 0; padding: 0; }
+
+    /* ID Selector - unique welcome banner */
+    #welcomeBanner {
+      background-color: #2980b9;
+      color: white;
+      padding: 30px;
+      text-align: center;
+    }
+
+    /* Class Selector - reusable highlight style */
+    .highlight {
+      background-color: yellow;
+      padding: 2px 6px;
+      border-radius: 3px;
+      font-weight: bold;
+      color: #333;
+    }
+
+    main { padding: 30px; }
+    p { font-size: 16px; line-height: 1.6; }
+  </style>
+</head>
+<body>
+
+  <!-- Welcome Banner using ID -->
+  <div id="welcomeBanner">
+    <h1>Welcome Back, John! 👋</h1>
+    <p>You are logged in as a <strong>Community Member</strong>.</p>
+    <!-- Inline style for special offer span -->
+    <span style="color: red; font-weight: bold; font-size: 18px;">
+      🎉 Special Offer: Free registration for the next 3 events!
+    </span>
+  </div>
+
+  <main>
+    <h2>Featured Events</h2>
+    <p>
+      Join our upcoming <span class="highlight">Music Festival</span> on June 15th.
+      Don't miss the <span class="highlight">Tech Meetup</span> happening this weekend.
+    </p>
+    <p>
+      All events are <span class="highlight">FREE</span> for registered members.
+    </p>
+  </main>
+
+</body>
+</html>

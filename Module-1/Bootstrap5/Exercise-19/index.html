@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sass Customization - Community Portal</title>
+  <!-- Using custom CSS to simulate the Sass-customized result -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    /* This simulates what Sass customization produces after compiling */
+    /* In a real project: override variables in _variables.scss then recompile Bootstrap */
+
+    :root {
+      --bs-primary: #e74c3c;       /* Custom primary color (red) */
+      --bs-primary-rgb: 231, 76, 60;
+      --bs-border-radius: 1.5rem;  /* Custom border radius */
+    }
+
+    .btn-custom-primary {
+      background-color: #e74c3c;
+      border-color: #c0392b;
+      color: white;
+      border-radius: 1.5rem;
+    }
+    .btn-custom-primary:hover {
+      background-color: #c0392b;
+      color: white;
+    }
+    .card-custom { border-radius: 1.5rem; }
+    .badge-custom { background-color: #e74c3c; border-radius: 1.5rem; }
+  </style>
+</head>
+<body class="bg-light py-4">
+  <div class="container" style="max-width:700px;">
+
+    <h2 class="fw-bold mb-2">Exercise 19: Customization with Sass</h2>
+
+    <div class="alert alert-info mb-4">
+      <strong>📌 How Sass Customization Works:</strong>
+      <ol class="mb-0 mt-2 small">
+        <li>Install Bootstrap via npm: <code>npm install bootstrap</code></li>
+        <li>Create a <code>custom.scss</code> file</li>
+        <li>Override variables <strong>before</strong> importing Bootstrap: <br>
+            <code>$primary: #e74c3c;</code><br>
+            <code>$border-radius: 1.5rem;</code><br>
+            <code>@import "bootstrap/scss/bootstrap";</code>
+        </li>
+        <li>Compile Sass: <code>npx sass custom.scss custom.css</code></li>
+        <li>Link the compiled <code>custom.css</code> in your HTML</li>
+      </ol>
+    </div>
+
+    <h5 class="text-muted mb-3">Result — Custom Primary Color (#e74c3c) & Border Radius (1.5rem)</h5>
+
+    <div class="card card-custom shadow-sm mb-4">
+      <div class="card-body">
+        <h5 class="card-title">🎵 Music Festival</h5>
+        <p class="card-text text-muted">Cards now use custom border-radius from Sass variable.</p>
+        <button class="btn btn-custom-primary">Register Now</button>
+        <span class="badge badge-custom ms-2">Upcoming</span>
+      </div>
+    </div>
+
+    <div class="card card-custom shadow-sm">
+      <div class="card-header" style="background:#e74c3c; color:white; border-radius:1.5rem 1.5rem 0 0;">
+        Custom Sass Theme
+      </div>
+      <div class="card-body">
+        <p>The primary color, border-radius, and other variables are all customized via Sass, giving a completely unique brand identity to the portal without writing CSS from scratch.</p>
+      </div>
+    </div>
+
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

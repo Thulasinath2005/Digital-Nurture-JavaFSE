@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Event Feedback - Community Portal</title>
+  <style>
+    body { font-family: Arial, sans-serif; background: #f0f4f8; padding: 30px; }
+    .container { max-width: 550px; margin: 0 auto; background: white; padding: 30px; border-radius: 10px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); }
+    h2 { color: #2c3e50; text-align: center; }
+    label { display: block; margin-top: 15px; font-weight: bold; color: #333; }
+    input, select, textarea { width: 100%; padding: 10px; margin-top: 5px; border: 1px solid #ccc; border-radius: 5px; box-sizing: border-box; }
+    .error { color: red; font-size: 13px; margin-top: 4px; }
+    .info { color: green; font-size: 13px; margin-top: 4px; }
+    button { margin-top: 20px; padding: 12px 25px; background: #2980b9; color: white; border: none; border-radius: 5px; cursor: pointer; font-size: 15px; }
+    button:hover { background: #1a5276; }
+    #charCount { font-size: 13px; color: #777; margin-top: 5px; }
+
+    /* Image enlargement */
+    .event-thumb { width: 120px; height: 90px; border-radius: 8px; cursor: pointer; transition: transform 0.3s; margin-top: 10px; border: 2px solid #ccc; }
+    .event-thumb.enlarged { transform: scale(2.5); z-index: 10; position: relative; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2>📝 Event Feedback</h2>
+
+    <!-- Phone field with onblur validation -->
+    <label for="phone">Phone Number</label>
+    <input type="text" id="phone" placeholder="e.g. 9876543210"
+           onblur="validatePhone(this)">
+    <p id="phoneError" class="error"></p>
+
+    <!-- Dropdown with onchange to show fee -->
+    <label for="eventSelect">Select Event</label>
+    <select id="eventSelect" onchange="showFee(this)">
+      <option value="">-- Choose Event --</option>
+      <option value="100">🎵 Music Festival - ₹100</option>
+      <option value="0">💻 Tech Meetup - FREE</option>
+      <option value="50">🎨 Art Exhibition - ₹50</option>
+    </select>
+    <p id="feeDisplay" class="info"></p>
+
+    <!-- Textarea with keydown character counter -->
+    <label for="feedback">Your Feedback</label>
+    <textarea id="feedback" rows="4" placeholder="Write your feedback..."
+              onkeyup="countChars(this)"></textarea>
+    <p id="charCount">Characters typed: 0</p>
+
+    <!-- Event image with ondblclick to enlarge -->
+    <label>Event Image (Double-click to enlarge)</label><br>
+    <img src="https://via.placeholder.com/120x90/3498db/white?text=Event"
+         alt="Event Image"
+         class="event-thumb"
+         id="eventImg"
+         ondblclick="toggleEnlarge(this)">
+
+    <!-- Submit with onclick confirmation -->
+    <br>
+    <button onclick="submitFeedback()">Submit Feedback</button>
+  </div>
+
+  <script>
+    // onblur: validate phone number
+    function validatePhone(input) {
+      const phone = input.value.trim();
+      const err = document.getElementById('phoneError');
+      if (!/^\d{10}$/.test(phone)) {
+        err.textContent = '❌ Please enter a valid 10-digit phone number.';
+      } else {
+        err.textContent = '✅ Phone number looks good!';
+        err.style.color = 'green';
+      }
+    }
+
+    // onchange: show event fee
+    function showFee(select) {
+      const fee = select.value;
+      const display = document.getElementById('feeDisplay');
+      if (fee === '') {
+        display.textContent = '';
+      } else if (fee === '0') {
+        display.textContent = '✅ This event is FREE!';
+      } else {
+        display.textContent = `💰 Registration Fee: ₹${fee}`;
+      }
+    }
+
+    // onkeyup: character counter
+    function countChars(textarea) {
+      document.getElementById('charCount').textContent =
+        `Characters typed: ${textarea.value.length}`;
+    }
+
+    // ondblclick: enlarge image
+    function toggleEnlarge(img) {
+      img.classList.toggle('enlarged');
+    }
+
+    // onclick: submit confirmation
+    function submitFeedback() {
+      alert('✅ Thank you for your feedback! It has been submitted successfully.');
+    }
+  </script>
+</body>
+</html>

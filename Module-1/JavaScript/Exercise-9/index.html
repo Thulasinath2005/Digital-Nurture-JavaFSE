@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Async JS - Community Portal</title>
+  <style>
+    body { font-family: Arial, sans-serif; padding: 20px; background: #f0f4f8; }
+    .container { background: white; padding: 25px; border-radius: 8px; max-width: 600px; margin: 0 auto; }
+    h2 { color: #2c3e50; }
+    button { padding: 10px 20px; background: #2980b9; color: white; border: none; border-radius: 5px; cursor: pointer; margin: 5px; }
+    .event-card { padding: 12px; background: #eaf6ff; border-radius: 8px; margin: 8px 0; border-left: 4px solid #2980b9; }
+    #spinner { display: none; text-align: center; padding: 20px; font-size: 24px; }
+    #errorMsg { color: #e74c3c; background: #fadbd8; padding: 10px; border-radius: 5px; display: none; margin-top: 10px; }
+    h3 { color: #2980b9; margin-top: 20px; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2>Exercise 9: Async JS, Promises & Async/Await</h2>
+
+    <h3>📡 Fetch Events (using .then/.catch)</h3>
+    <button onclick="fetchWithThen()">Fetch with .then()</button>
+
+    <h3>⚡ Fetch Events (using async/await)</h3>
+    <button onclick="fetchWithAsync()">Fetch with async/await</button>
+
+    <div id="spinner">⏳ Loading events...</div>
+    <div id="eventList"></div>
+    <div id="errorMsg"></div>
+  </div>
+
+  <script>
+    // Mock API URL (JSONPlaceholder for demo)
+    const MOCK_API = 'https://jsonplaceholder.typicode.com/todos?_limit=4';
+
+    // Simulated local event data (as if from API)
+    const mockEvents = [
+      { id: 1, name: "🎵 Music Festival",   date: "June 15",  city: "New York"    },
+      { id: 2, name: "💻 Tech Meetup",      date: "June 22",  city: "Chicago"     },
+      { id: 3, name: "🎨 Art Exhibition",   date: "July 5",   city: "Los Angeles" },
+      { id: 4, name: "🍕 Food Fair",        date: "July 12",  city: "Houston"     },
+    ];
+
+    // Simulate a fetch with a Promise
+    function fakeFetch(shouldFail = false) {
+      return new Promise((resolve, reject) => {
+        setTimeout(() => {
+          if (shouldFail) {
+            reject(new Error("Network error: Could not load events."));
+          } else {
+            resolve(mockEvents);
+          }
+        }, 1500); // Simulate 1.5s delay
+      });
+    }
+
+    function showSpinner(show) {
+      document.getElementById('spinner').style.display = show ? 'block' : 'none';
+      document.getElementById('eventList').innerHTML = '';
+      document.getElementById('errorMsg').style.display = 'none';
+    }
+
+    function displayEvents(events) {
+      document.getElementById('eventList').innerHTML = events.map(e => `
+        <div class="event-card">
+          <strong>${e.name}</strong><br>
+          📅 ${e.date} — 📍 ${e.city}
+        </div>
+      `).join('');
+    }
+
+    // Using .then() and .catch()
+    function fetchWithThen() {
+      showSpinner(true);
+      fakeFetch()
+        .then(events => {
+          showSpinner(false);
+          displayEvents(events);
+        })
+        .catch(err => {
+          showSpinner(false);
+          document.getElementById('errorMsg').style.display = 'block';
+          document.getElementById('errorMsg').textContent = `❌ ${err.message}`;
+        });
+    }
+
+    // Using async/await
+    async function fetchWithAsync() {
+      showSpinner(true);
+      try {
+        const events = await fakeFetch();   // await the promise
+        showSpinner(false);
+        displayEvents(events);
+      } catch (err) {
+        showSpinner(false);
+        document.getElementById('errorMsg').style.display = 'block';
+        document.getElementById('errorMsg').textContent = `❌ ${err.message}`;
+      }
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Box Model - Community Portal</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: Arial, sans-serif; background: #f0f4f8; padding: 25px; }
+
+    h2 { color: #2c3e50; margin-bottom: 15px; }
+    h3 { color: #2980b9; margin-bottom: 10px; }
+
+    /* Event card demonstrating full box model */
+    .eventCard {
+      background: white;
+      width: 300px;
+      display: inline-block;
+      vertical-align: top;
+
+      /* Border */
+      border: 2px solid #2980b9;
+      border-radius: 8px;
+
+      /* Padding - inside border */
+      padding: 20px;
+
+      /* Margin - outside border */
+      margin: 15px;
+
+      /* Shadow */
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    }
+
+    .eventCard h3 { margin-bottom: 8px; }
+    .eventCard p  { color: #666; font-size: 14px; margin-bottom: 12px; }
+
+    /* Outline on selected card - doesn't affect layout */
+    .eventCard:focus-within,
+    .eventCard.selected {
+      outline: 3px solid #f39c12;
+      outline-offset: 3px;
+    }
+
+    /* Form field outline */
+    input {
+      padding: 8px 12px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      font-size: 14px;
+    }
+    input:focus {
+      outline: 2px solid #2980b9;
+      outline-offset: 2px;
+      border-color: transparent;
+    }
+
+    /* Visibility demo */
+    .hidden-box {
+      visibility: hidden;   /* Hides but KEEPS space */
+      background: #e74c3c;
+      color: white;
+      padding: 10px;
+      border-radius: 5px;
+      margin: 10px 0;
+    }
+
+    .none-box {
+      display: none;        /* Hides AND removes space */
+      background: #27ae60;
+      color: white;
+      padding: 10px;
+      border-radius: 5px;
+    }
+
+    .demo-section {
+      background: white; padding: 20px; border-radius: 8px;
+      margin-bottom: 20px; box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+    }
+
+    button { padding: 8px 16px; background: #2980b9; color: white; border: none; border-radius: 5px; cursor: pointer; margin-right: 8px; margin-top: 10px; }
+  </style>
+</head>
+<body>
+
+  <h2>📦 Box Model & Layout Demo</h2>
+
+  <!-- Event cards with box model -->
+  <div class="demo-section">
+    <h3>Event Cards — Border + Padding + Margin</h3>
+    <div class="eventCard">
+      <h3>🎵 Music Festival</h3>
+      <p>An evening of live music and community fun. Seats limited!</p>
+      <strong>June 15, 2025</strong>
+    </div>
+    <div class="eventCard selected">
+      <h3>💻 Tech Meetup</h3>
+      <p>Connect with developers and tech professionals in your city.</p>
+      <strong>June 22, 2025</strong>
+    </div>
+  </div>
+
+  <!-- Outline on form input -->
+  <div class="demo-section">
+    <h3>Form Input with Outline on Focus</h3>
+    <input type="text" placeholder="Click here to see outline...">
+  </div>
+
+  <!-- visibility: hidden vs display: none -->
+  <div class="demo-section">
+    <h3>visibility: hidden vs display: none</h3>
+    <p>Box 1 uses <code>visibility: hidden</code> — space is reserved:</p>
+    <div class="hidden-box">This is hidden but space remains</div>
+    <p>↑ Notice the gap above where the hidden box sits.</p>
+    <br>
+    <p>Box 2 uses <code>display: none</code> — completely removed:</p>
+    <div class="none-box">This is removed from layout</div>
+    <p>↑ No gap because the box is fully removed from flow.</p>
+
+    <button onclick="toggleVisibility()">Toggle visibility:hidden Box</button>
+    <button onclick="toggleDisplay()">Toggle display:none Box</button>
+  </div>
+
+  <script>
+    function toggleVisibility() {
+      const box = document.querySelector('.hidden-box');
+      box.style.visibility = box.style.visibility === 'visible' ? 'hidden' : 'visible';
+    }
+    function toggleDisplay() {
+      const box = document.querySelector('.none-box');
+      box.style.display = box.style.display === 'block' ? 'none' : 'block';
+    }
+  </script>
+
+</body>
+</html>

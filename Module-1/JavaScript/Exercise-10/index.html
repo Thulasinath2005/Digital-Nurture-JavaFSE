@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Modern JS ES6+ - Community Portal</title>
+  <style>
+    body { font-family: Arial, sans-serif; padding: 20px; background: #f0f4f8; }
+    .container { background: white; padding: 25px; border-radius: 8px; max-width: 600px; margin: 0 auto; }
+    h2 { color: #2c3e50; }
+    h3 { color: #2980b9; margin-top: 20px; }
+    .card { background: #eaf6ff; padding: 12px; border-radius: 8px; margin: 8px 0; font-size: 14px; }
+    button { padding: 8px 16px; background: #2980b9; color: white; border: none; border-radius: 5px; cursor: pointer; margin: 5px; }
+    code { background: #f5f5f5; padding: 2px 6px; border-radius: 3px; font-size: 13px; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2>Exercise 10: Modern JS — ES6+ Features</h2>
+
+    <h3>1. let, const & Default Parameters</h3>
+    <button onclick="showDefaultParams()">Show Default Params</button>
+    <div id="defaultOut" class="card" style="display:none;"></div>
+
+    <h3>2. Destructuring</h3>
+    <button onclick="showDestructuring()">Show Destructuring</button>
+    <div id="destructOut" class="card" style="display:none;"></div>
+
+    <h3>3. Spread Operator — Clone & Filter</h3>
+    <button onclick="showSpread()">Show Spread</button>
+    <div id="spreadOut" class="card" style="display:none;"></div>
+  </div>
+
+  <script>
+    const events = [
+      { id: 1, name: "Music Festival", category: "Music", city: "New York", seats: 20 },
+      { id: 2, name: "Tech Meetup",    category: "Tech",  city: "Chicago",  seats: 0  },
+      { id: 3, name: "Art Exhibition", category: "Art",   city: "L.A.",     seats: 15 },
+      { id: 4, name: "Food Fair",      category: "Food",  city: "Houston",  seats: 30 },
+    ];
+
+    // Default parameters in function
+    function formatEvent(name, city = "Unknown City", seats = 0) {
+      return `📌 ${name} | 📍 ${city} | 💺 ${seats} seats`;
+    }
+
+    function showDefaultParams() {
+      const out = [
+        formatEvent("Workshop"),                     // uses defaults
+        formatEvent("Jazz Night", "Boston"),          // partial default
+        formatEvent("Tech Summit", "NYC", 50),        // no defaults used
+      ].join('\n');
+      const el = document.getElementById('defaultOut');
+      el.style.display = 'block';
+      el.textContent = out;
+    }
+
+    // Destructuring to extract event details
+    function showDestructuring() {
+      const { name, category, city, seats } = events[0];  // object destructure
+      const [first, second] = events;                       // array destructure
+
+      const el = document.getElementById('destructOut');
+      el.style.display = 'block';
+      el.innerHTML = `
+        <strong>Object Destructuring (events[0]):</strong><br>
+        name: ${name}, category: ${category}, city: ${city}, seats: ${seats}<br><br>
+        <strong>Array Destructuring:</strong><br>
+        First: ${first.name} | Second: ${second.name}
+      `;
+    }
+
+    // Spread operator — clone before filtering (preserves original)
+    function showSpread() {
+      const cloned = [...events];        // spread to clone
+      const techOnly = [...events].filter(e => e.category === "Tech");
+      const extra = { id: 5, name: "Book Fair", category: "Edu", city: "SF", seats: 25 };
+      const extended = [...events, extra]; // spread + add
+
+      const el = document.getElementById('spreadOut');
+      el.style.display = 'block';
+      el.innerHTML = `
+        <strong>Cloned array length:</strong> ${cloned.length} (original untouched)<br>
+        <strong>Filtered (Tech only):</strong> ${techOnly.map(e => e.name).join(', ')}<br>
+        <strong>Extended array length:</strong> ${extended.length} (added Book Fair)
+      `;
+    }
+  </script>
+</body>
+</html>

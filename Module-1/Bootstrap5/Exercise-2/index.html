@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bootstrap Structure - Community Portal</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body class="bg-light">
+
+  <div class="container py-5">
+    <h1 class="display-6 fw-bold mb-4">Bootstrap 5 — Structure & Files</h1>
+
+    <div class="row g-3">
+      <div class="col-md-4">
+        <div class="card border-primary h-100">
+          <div class="card-header bg-primary text-white fw-bold">📁 css/</div>
+          <div class="card-body">
+            <p class="card-text">Contains compiled CSS files:</p>
+            <ul class="small">
+              <li><code>bootstrap.css</code> — full unminified</li>
+              <li><code>bootstrap.min.css</code> — minified (use in production)</li>
+              <li><code>bootstrap-grid.css</code> — grid only</li>
+              <li><code>bootstrap-utilities.css</code> — utilities only</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="card border-success h-100">
+          <div class="card-header bg-success text-white fw-bold">📁 js/</div>
+          <div class="card-body">
+            <p class="card-text">Contains JavaScript plugin files:</p>
+            <ul class="small">
+              <li><code>bootstrap.bundle.min.js</code> — JS + Popper bundled ✅</li>
+              <li><code>bootstrap.min.js</code> — JS only (needs Popper separately)</li>
+              <li><code>bootstrap.esm.min.js</code> — ES Module version</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="card border-warning h-100">
+          <div class="card-header bg-warning fw-bold">📁 icons/</div>
+          <div class="card-body">
+            <p class="card-text">Bootstrap Icons library:</p>
+            <ul class="small">
+              <li>1800+ SVG icons</li>
+              <li>Use via <code>&lt;i class="bi bi-..."&gt;</code></li>
+              <li>Installable via npm or CDN</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="alert alert-info mt-4">
+      <strong>✅ Best Practice:</strong> Always use <code>bootstrap.bundle.min.js</code> — it includes Popper.js for dropdowns, tooltips, and modals.
+    </div>
+
+    <!-- Demonstrate a JS plugin works: Tooltip -->
+    <button type="button" class="btn btn-secondary mt-2"
+            data-bs-toggle="tooltip" data-bs-placement="top"
+            title="Bootstrap JS plugin is working!">
+      Hover for Tooltip (JS Plugin Test)
+    </button>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <script>
+    // Initialize tooltips (requires bootstrap.bundle.min.js)
+    const tooltipEls = document.querySelectorAll('[data-bs-toggle="tooltip"]');
+    tooltipEls.forEach(el => new bootstrap.Tooltip(el));
+  </script>
+</body>
+</html>

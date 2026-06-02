@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Debugging - Community Portal</title>
+  <style>
+    body { font-family: Arial, sans-serif; padding: 20px; background: #f0f4f8; }
+    .container { background: white; padding: 25px; border-radius: 8px; max-width: 580px; margin: 0 auto; }
+    h2 { color: #2c3e50; }
+    h3 { color: #2980b9; margin-top: 20px; }
+    input { padding: 9px; border: 1px solid #ccc; border-radius: 5px; width: 220px; margin-right: 8px; }
+    button { padding: 9px 18px; background: #2980b9; color: white; border: none; border-radius: 5px; cursor: pointer; margin: 4px; }
+    .debug-box { background: #fff3cd; border-left: 4px solid #ffc107; padding: 14px; border-radius: 6px; margin: 12px 0; font-size: 13px; }
+    #logOutput { background: #1e1e1e; color: #d4d4d4; padding: 14px; border-radius: 6px; font-family: monospace; font-size: 13px; min-height: 100px; margin-top: 10px; white-space: pre-wrap; }
+    .log-info  { color: #9cdcfe; }
+    .log-warn  { color: #dcdcaa; }
+    .log-error { color: #f44747; }
+    .log-ok    { color: #4ec9b0; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2>Exercise 13: Debugging & Testing</h2>
+
+    <div class="debug-box">
+      💡 <strong>Instructions:</strong> Open DevTools (F12). Go to <strong>Console</strong> tab to watch live logs.
+      Go to <strong>Network</strong> tab and click "Simulate Fetch" to see the request payload.
+      Set a <strong>breakpoint</strong> in Sources tab inside <code>processForm()</code>.
+    </div>
+
+    <h3>📋 Registration Form (Buggy → Fixed)</h3>
+    <input type="text"  id="nameInput"  placeholder="Your name">
+    <input type="email" id="emailInput" placeholder="Your email">
+    <br><br>
+    <button onclick="processForm()">Submit (with Breakpoint here)</button>
+    <button onclick="simulateFetch()">📡 Simulate Fetch (Network tab)</button>
+    <button onclick="triggerError()">💥 Trigger Error</button>
+
+    <h3>🖥️ Live Console Output</h3>
+    <div id="logOutput">Waiting for actions...</div>
+  </div>
+
+  <script>
+    const logEl = document.getElementById('logOutput');
+
+    // Override console to also show in UI
+    const originalLog   = console.log.bind(console);
+    const originalWarn  = console.warn.bind(console);
+    const originalError = console.error.bind(console);
+
+    function appendLog(msg, cls) {
+      logEl.innerHTML += `<span class="${cls}">${msg}</span>\n`;
+      logEl.scrollTop = logEl.scrollHeight;
+    }
+
+    console.log = (...args) => { originalLog(...args);   appendLog('[LOG]   ' + args.join(' '), 'log-info');  };
+    console.warn = (...args) => { originalWarn(...args); appendLog('[WARN]  ' + args.join(' '), 'log-warn');  };
+    console.error= (...args) => { originalError(...args);appendLog('[ERROR] ' + args.join(' '), 'log-error'); };
+
+    console.log('Page loaded — Debugging Exercise Ready');
+
+    // Target function for breakpoint demo
+    function processForm() {
+      const name  = document.getElementById('nameInput').value;
+      const email = document.getElementById('emailInput').value;
+
+      console.log(`Step 1: Form submitted`);
+      console.log(`Step 2: name = "${name}"`);
+      console.log(`Step 3: email = "${email}"`);
+
+      // Inspect variables here with a breakpoint in DevTools Sources tab
+      if (!name || !email) {
+        console.warn('Step 4: Validation failed — fields are empty');
+        return;
+      }
+
+      const payload = { name, email, event: 'Community Portal' };
+      console.log('Step 4: Payload ready →', JSON.stringify(payload));
+      appendLog('[OK]    Payload: ' + JSON.stringify(payload), 'log-ok');
+    }
+
+    // Show fetch request in Network tab
+    async function simulateFetch() {
+      console.log('Initiating fetch request...');
+      try {
+        const res = await fetch('https://jsonplaceholder.typicode.com/posts/1');
+        const data = await res.json();
+        console.log('Fetch success — check Network tab for request details');
+        appendLog('[OK]    Fetch response received: id=' + data.id, 'log-ok');
+      } catch (err) {
+        console.error('Fetch failed: ' + err.message);
+      }
+    }
+
+    // Simulate a caught error
+    function triggerError() {
+      try {
+        const result = JSON.parse("{ bad json }");
+      } catch (err) {
+        console.error('Caught Error: ' + err.message);
+      }
+    }
+  </script>
+</body>
+</html>

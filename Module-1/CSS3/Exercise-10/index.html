@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Responsive Design - Community Portal</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: Arial, sans-serif;
+      background: #f0f4f8;
+    }
+
+    /* ── Header ── */
+    header {
+      background: #2c3e50;
+      color: white;
+      padding: 20px;
+      text-align: center;
+    }
+    header h1 { font-size: 28px; }
+
+    /* ── Navigation — Flexbox, horizontal on desktop ── */
+    nav {
+      background: #34495e;
+    }
+    nav ul {
+      list-style: none;
+      display: flex;              /* Flex row on desktop */
+      justify-content: center;
+      flex-wrap: wrap;
+      padding: 0;
+    }
+    nav ul li a {
+      display: block;
+      color: white;
+      padding: 14px 20px;
+      text-decoration: none;
+      font-size: 15px;
+    }
+    nav ul li a:hover { background: #2980b9; }
+
+    /* ── Main Grid — 3 columns on desktop ── */
+    .events-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);   /* 3 columns */
+      gap: 20px;
+      padding: 25px;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .eventCard {
+      background: white;
+      border-radius: 10px;
+      padding: 20px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.07);
+    }
+    .eventCard img {
+      width: 100%;              /* Flexible images */
+      height: 160px;
+      object-fit: cover;
+      border-radius: 6px;
+      margin-bottom: 12px;
+    }
+    .eventCard h3 { color: #2c3e50; margin-bottom: 8px; }
+    .eventCard p  { color: #666; font-size: 14px; line-height: 1.6; }
+    .eventCard .date { font-size: 13px; color: #2980b9; font-weight: bold; margin-top: 10px; }
+
+    footer {
+      background: #2c3e50;
+      color: white;
+      text-align: center;
+      padding: 20px;
+      font-size: 14px;
+    }
+
+    /* ═══════════════════════════════════════════
+       MEDIA QUERIES — Responsive Breakpoints
+    ═══════════════════════════════════════════ */
+
+    /* Tablet: 2 columns */
+    @media (max-width: 900px) {
+      .events-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    /* Mobile: stack everything, smaller fonts */
+    @media (max-width: 768px) {
+      header h1 {
+        font-size: 22px;          /* Reduce heading size */
+      }
+
+      /* Stack nav vertically */
+      nav ul {
+        flex-direction: column;
+        align-items: center;
+      }
+
+      nav ul li a {
+        font-size: 14px;
+        padding: 10px 15px;
+      }
+
+      /* Single column events */
+      .events-grid {
+        grid-template-columns: 1fr;
+        padding: 15px;
+      }
+
+      .eventCard img {
+        height: 200px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>🏙️ Community Event Portal</h1>
+    <p>Responsive for all screen sizes</p>
+  </header>
+
+  <nav>
+    <ul>
+      <li><a href="#">Home</a></li>
+      <li><a href="#">Events</a></li>
+      <li><a href="#">Register</a></li>
+      <li><a href="#">Gallery</a></li>
+      <li><a href="#">Contact</a></li>
+    </ul>
+  </nav>
+
+  <div class="events-grid">
+    <div class="eventCard">
+      <img src="https://via.placeholder.com/400x160/3498db/white?text=Music+Festival" alt="Music Festival">
+      <h3>🎵 Music Festival</h3>
+      <p>Live concerts, food stalls, and community fun in City Park.</p>
+      <p class="date">📅 June 15, 2025</p>
+    </div>
+    <div class="eventCard">
+      <img src="https://via.placeholder.com/400x160/e74c3c/white?text=Tech+Meetup" alt="Tech Meetup">
+      <h3>💻 Tech Meetup</h3>
+      <p>Connect with developers and innovators in the city.</p>
+      <p class="date">📅 June 22, 2025</p>
+    </div>
+    <div class="eventCard">
+      <img src="https://via.placeholder.com/400x160/27ae60/white?text=Art+Exhibition" alt="Art Exhibition">
+      <h3>🎨 Art Exhibition</h3>
+      <p>Explore stunning artworks from local and regional artists.</p>
+      <p class="date">📅 July 5, 2025</p>
+    </div>
+  </div>
+
+  <footer>
+    <p>&copy; 2025 Community Event Portal — Resize the window to see responsive layout!</p>
+  </footer>
+
+</body>
+</html>

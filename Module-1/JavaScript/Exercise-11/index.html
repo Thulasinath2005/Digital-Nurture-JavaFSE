@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Forms - Community Portal</title>
+  <style>
+    body { font-family: Arial, sans-serif; padding: 20px; background: #f0f4f8; }
+    .container { background: white; padding: 25px; border-radius: 8px; max-width: 500px; margin: 0 auto; }
+    h2 { color: #2c3e50; margin-bottom: 20px; }
+    label { display: block; font-weight: bold; margin-top: 15px; color: #333; }
+    input, select { width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 5px; box-sizing: border-box; margin-top: 5px; }
+    input.error { border-color: #e74c3c; }
+    .err-msg { color: #e74c3c; font-size: 12px; margin-top: 4px; display: none; }
+    button { width: 100%; padding: 12px; margin-top: 20px; background: #2980b9; color: white; border: none; border-radius: 5px; font-size: 16px; cursor: pointer; }
+    #successMsg { display: none; background: #d5f5e3; border-left: 4px solid #27ae60; padding: 15px; border-radius: 5px; margin-top: 15px; color: #1e8449; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2>📝 Event Registration Form</h2>
+
+    <form id="regForm">
+      <label>Full Name</label>
+      <input type="text" id="name" placeholder="Enter your name">
+      <p class="err-msg" id="nameErr">❌ Name is required.</p>
+
+      <label>Email Address</label>
+      <input type="email" id="email" placeholder="Enter your email">
+      <p class="err-msg" id="emailErr">❌ Enter a valid email address.</p>
+
+      <label>Select Event</label>
+      <select id="event">
+        <option value="">-- Choose an event --</option>
+        <option value="Music Festival">🎵 Music Festival</option>
+        <option value="Tech Meetup">💻 Tech Meetup</option>
+        <option value="Art Exhibition">🎨 Art Exhibition</option>
+      </select>
+      <p class="err-msg" id="eventErr">❌ Please select an event.</p>
+
+      <!-- Prevent default and validate via JS -->
+      <button type="submit">Register</button>
+    </form>
+
+    <div id="successMsg"></div>
+  </div>
+
+  <script>
+    document.getElementById('regForm').addEventListener('submit', function (e) {
+      e.preventDefault();   // Prevent default form submission
+
+      // Capture values using form.elements or getElementById
+      const name  = document.getElementById('name').value.trim();
+      const email = document.getElementById('email').value.trim();
+      const event = document.getElementById('event').value;
+
+      let valid = true;
+
+      // Validate name
+      if (!name) {
+        showError('name', 'nameErr');
+        valid = false;
+      } else { clearError('name', 'nameErr'); }
+
+      // Validate email
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      if (!email || !emailRegex.test(email)) {
+        showError('email', 'emailErr');
+        valid = false;
+      } else { clearError('email', 'emailErr'); }
+
+      // Validate event selection
+      if (!event) {
+        document.getElementById('eventErr').style.display = 'block';
+        valid = false;
+      } else { document.getElementById('eventErr').style.display = 'none'; }
+
+      if (valid) {
+        const msg = document.getElementById('successMsg');
+        msg.style.display = 'block';
+        msg.innerHTML = `✅ <strong>${name}</strong>, you are registered for <strong>${event}</strong>!<br>A confirmation will be sent to <strong>${email}</strong>.`;
+        this.reset();
+      }
+    });
+
+    function showError(fieldId, errId) {
+      document.getElementById(fieldId).classList.add('error');
+      document.getElementById(errId).style.display = 'block';
+    }
+    function clearError(fieldId, errId) {
+      document.getElementById(fieldId).classList.remove('error');
+      document.getElementById(errId).style.display = 'none';
+    }
+  </script>
+</body>
+</html>

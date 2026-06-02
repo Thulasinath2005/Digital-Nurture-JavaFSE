@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Borders & Shadows - Community Portal</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body class="bg-light py-4">
+  <div class="container">
+    <h2 class="fw-bold mb-4">Exercise 15: Borders, Shadows & Rounded Corners</h2>
+
+    <!-- 15.1: Border utilities on images -->
+    <h5 class="text-muted mb-3">15.1 — Border Utilities on Images</h5>
+    <div class="d-flex flex-wrap gap-4 align-items-center mb-4">
+      <div class="text-center">
+        <img src="https://via.placeholder.com/100/3498db/white?text=A"
+             class="border border-primary border-3" style="width:100px;height:100px;" alt="Border primary">
+        <p class="small mt-2">border-primary border-3</p>
+      </div>
+      <div class="text-center">
+        <img src="https://via.placeholder.com/100/27ae60/white?text=B"
+             class="rounded" style="width:100px;height:100px;" alt="Rounded">
+        <p class="small mt-2">rounded</p>
+      </div>
+      <div class="text-center">
+        <img src="https://via.placeholder.com/100/e74c3c/white?text=C"
+             class="rounded-circle border border-danger border-3" style="width:100px;height:100px;" alt="Circle">
+        <p class="small mt-2">rounded-circle</p>
+      </div>
+      <div class="text-center">
+        <img src="https://via.placeholder.com/100/f39c12/white?text=D"
+             class="rounded-pill border border-warning border-3" style="width:100px;height:100px;object-fit:cover;" alt="Pill">
+        <p class="small mt-2">rounded-pill</p>
+      </div>
+    </div>
+
+    <!-- 15.2: Shadow and rounded-pill in cards -->
+    <h5 class="text-muted mb-3">15.2 — Shadow & rounded-pill on Cards</h5>
+    <div class="row g-3">
+      <div class="col-md-4">
+        <div class="card rounded-pill shadow p-3 text-center">
+          <div class="card-body">
+            <h6 class="fw-bold">shadow</h6>
+            <p class="small text-muted mb-0">Normal shadow + rounded-pill</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="card rounded shadow-lg p-3 text-center">
+          <div class="card-body">
+            <h6 class="fw-bold">shadow-lg</h6>
+            <p class="small text-muted mb-0">Large shadow + rounded</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="card rounded-3 shadow-sm border-0 p-3 text-center bg-primary text-white">
+          <div class="card-body">
+            <h6 class="fw-bold">shadow-sm</h6>
+            <p class="small mb-0" style="opacity:0.85;">Small shadow, no border</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

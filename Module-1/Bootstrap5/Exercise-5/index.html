@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Alignment & Reordering - Community Portal</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    .demo-box { background: #2980b9; color: white; padding: 20px; border-radius: 6px; text-align: center; }
+    .demo-box.green  { background: #27ae60; }
+    .demo-box.red    { background: #e74c3c; }
+    .demo-row { background: #f8f9fa; border: 1px dashed #ccc; border-radius: 6px; min-height: 100px; padding: 10px; margin-bottom: 20px; }
+    section { margin-bottom: 35px; }
+    h5 { color: #2980b9; margin-bottom: 12px; }
+  </style>
+</head>
+<body class="bg-light py-4">
+  <div class="container">
+
+    <h2 class="fw-bold mb-4">Exercise 5: Alignment & Reordering</h2>
+
+    <!-- 5.1: justify-content-center + align-items-center -->
+    <section>
+      <h5>5.1 — Centering with justify-content-center & align-items-center</h5>
+      <div class="row justify-content-center align-items-center demo-row">
+        <div class="col-md-4">
+          <div class="demo-box">🎯 Centered Content<br><small>justify-content-center</small></div>
+        </div>
+        <div class="col-md-4">
+          <div class="demo-box green">✅ Also Centered<br><small>align-items-center</small></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 5.2: Column reordering with order-md-* -->
+    <section>
+      <h5>5.2 — Column Reordering (order-md-1, order-md-2)</h5>
+      <p class="text-muted small">On desktop: Image appears first (left), Text second — but in HTML code, Text comes first.</p>
+      <div class="row g-3">
+        <!-- In HTML: Text is first, but on md+ it gets order-2 (appears right) -->
+        <div class="col-md-6 order-md-2">
+          <div class="demo-box red">📝 Text Section<br><small>HTML order: 1st | Display order: 2nd (order-md-2)</small></div>
+        </div>
+        <!-- In HTML: Image is second, but on md+ it gets order-1 (appears left) -->
+        <div class="col-md-6 order-md-1">
+          <div class="demo-box">🖼️ Image Section<br><small>HTML order: 2nd | Display order: 1st (order-md-1)</small></div>
+        </div>
+      </div>
+      <div class="alert alert-info mt-3 small">
+        💡 Resize to mobile to see both columns stack in original HTML order (Text first, Image second).
+      </div>
+    </section>
+
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Event Handling - Community Portal</title>
+  <style>
+    body { font-family: Arial, sans-serif; padding: 20px; background: #f0f4f8; }
+    .container { background: white; padding: 25px; border-radius: 8px; max-width: 600px; margin: 0 auto; }
+    h2 { color: #2c3e50; }
+    input[type=text] { padding: 8px; border: 1px solid #ccc; border-radius: 5px; width: 250px; margin-right: 8px; }
+    select { padding: 8px; border: 1px solid #ccc; border-radius: 5px; }
+    .event-card { padding: 12px 16px; background: #eaf6ff; border-radius: 8px; margin: 8px 0; display: flex; justify-content: space-between; align-items: center; }
+    .event-card.hidden { display: none; }
+    button { padding: 7px 14px; background: #27ae60; color: white; border: none; border-radius: 5px; cursor: pointer; font-size: 13px; }
+    button:hover { background: #1e8449; }
+    #searchBox { margin-bottom: 15px; }
+    h3 { color: #2980b9; margin-top: 20px; }
+    #filterMsg { color: #888; font-size: 13px; margin-top: 8px; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2>Exercise 8: Event Handling</h2>
+
+    <!-- keydown: quick search -->
+    <h3>🔍 Search Events (keydown)</h3>
+    <div id="searchBox">
+      <input type="text" id="searchInput" placeholder="Type event name to search..."
+             onkeyup="searchEvents(this.value)">
+    </div>
+
+    <!-- onchange: filter by category -->
+    <h3>📂 Filter by Category (onchange)</h3>
+    <select id="categoryFilter" onchange="filterByCategory(this.value)">
+      <option value="All">All Categories</option>
+      <option value="Music">🎵 Music</option>
+      <option value="Tech">💻 Tech</option>
+      <option value="Art">🎨 Art</option>
+      <option value="Food">🍕 Food</option>
+    </select>
+    <p id="filterMsg"></p>
+
+    <!-- Event list with onclick Register buttons -->
+    <h3>📋 Events</h3>
+    <div id="eventList"></div>
+  </div>
+
+  <script>
+    const events = [
+      { id: 1, name: "Music Festival",  category: "Music" },
+      { id: 2, name: "Tech Meetup",     category: "Tech"  },
+      { id: 3, name: "Art Exhibition",  category: "Art"   },
+      { id: 4, name: "Food Fair",       category: "Food"  },
+      { id: 5, name: "Jazz Night",      category: "Music" },
+    ];
+
+    function renderEvents(list) {
+      document.getElementById('eventList').innerHTML = list.map(ev => `
+        <div class="event-card" id="ev-${ev.id}" data-category="${ev.category}">
+          <span>📌 <strong>${ev.name}</strong> — ${ev.category}</span>
+          <!-- onclick: Register button -->
+          <button onclick="registerEvent(${ev.id}, this)">Register</button>
+        </div>
+      `).join('');
+    }
+
+    // onclick: register for event
+    function registerEvent(id, btn) {
+      btn.textContent = '✅ Registered';
+      btn.style.background = '#2980b9';
+      btn.disabled = true;
+    }
+
+    // onkeyup: search by name
+    function searchEvents(query) {
+      const filtered = events.filter(e =>
+        e.name.toLowerCase().includes(query.toLowerCase())
+      );
+      renderEvents(filtered);
+    }
+
+    // onchange: filter by category
+    function filterByCategory(category) {
+      const filtered = category === 'All' ? events : events.filter(e => e.category === category);
+      renderEvents(filtered);
+      document.getElementById('filterMsg').textContent =
+        `Showing ${filtered.length} event(s) in "${category}"`;
+    }
+
+    renderEvents(events);
+  </script>
+</body>
+</html>

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Display & Visibility - Community Portal</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body class="bg-light">
+
+  <!-- Sidebar only on tablet+ (d-none d-md-block) -->
+  <div class="d-flex">
+    <div class="d-none d-md-block bg-dark text-white p-3" style="width:220px; min-height:100vh;">
+      <h6 class="fw-bold mb-3">📂 Sidebar</h6>
+      <p class="small text-muted">Visible only on tablet and above (d-none d-md-block)</p>
+      <ul class="list-unstyled">
+        <li class="mb-2">🎵 Music</li>
+        <li class="mb-2">💻 Tech</li>
+        <li class="mb-2">🎨 Art</li>
+      </ul>
+    </div>
+
+    <div class="flex-grow-1 p-4">
+      <h2 class="fw-bold mb-4">Exercise 14: Display & Visibility</h2>
+
+      <!-- 14.1: d-none, d-md-block, d-lg-flex -->
+      <div class="alert alert-warning">
+        <strong>📱 Mobile only (d-block d-md-none):</strong> You are on a small screen.
+      </div>
+      <div class="alert alert-success d-none d-md-block d-lg-none">
+        <strong>💻 Tablet only (d-none d-md-block d-lg-none):</strong> You are on a medium screen.
+      </div>
+      <div class="alert alert-primary d-none d-lg-flex align-items-center gap-2">
+        <span>🖥️</span>
+        <strong>Desktop only (d-none d-lg-flex):</strong> You are on a large screen.
+      </div>
+
+      <div class="card shadow-sm mt-3">
+        <div class="card-body">
+          <h5>How it works:</h5>
+          <ul>
+            <li><code>d-none</code> — hidden on all screens</li>
+            <li><code>d-block</code> — shown as block</li>
+            <li><code>d-md-block</code> — shown as block at md (≥768px) and above</li>
+            <li><code>d-lg-flex</code> — shown as flex at lg (≥992px) and above</li>
+            <li><code>d-none d-md-block</code> → hidden on mobile, shown on tablet+</li>
+          </ul>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>User Preferences - Community Portal</title>
+  <style>
+    body { font-family: Arial, sans-serif; background: #f0f4f8; padding: 30px; }
+    .container { max-width: 500px; margin: 0 auto; background: white; padding: 30px; border-radius: 10px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); }
+    h2 { color: #2c3e50; }
+    label { font-weight: bold; color: #333; }
+    select { width: 100%; padding: 10px; margin: 10px 0; border: 1px solid #ccc; border-radius: 5px; font-size: 15px; }
+    .btn { padding: 10px 20px; border: none; border-radius: 5px; cursor: pointer; font-size: 14px; margin: 5px; }
+    .btn-save { background: #27ae60; color: white; }
+    .btn-clear { background: #e74c3c; color: white; }
+    .info-box { margin-top: 20px; padding: 15px; background: #eaf6ff; border-radius: 8px; border-left: 4px solid #3498db; }
+    .info-box p { margin: 5px 0; font-size: 14px; }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <h2>⚙️ My Event Preferences</h2>
+    <p>Select your preferred event type. Your preference will be saved and remembered on your next visit!</p>
+
+    <label for="eventPref">Preferred Event Type:</label>
+    <select id="eventPref" onchange="savePreference()">
+      <option value="">-- Select Event Type --</option>
+      <option value="music">🎵 Music</option>
+      <option value="tech">💻 Technology</option>
+      <option value="art">🎨 Art</option>
+      <option value="food">🍕 Food</option>
+      <option value="sports">⚽ Sports</option>
+    </select>
+
+    <button class="btn btn-save" onclick="savePreference()">💾 Save Preference</button>
+    <button class="btn btn-clear" onclick="clearPreferences()">🗑️ Clear Preferences</button>
+
+    <div class="info-box">
+      <p><strong>localStorage:</strong> <span id="localStorageInfo">—</span></p>
+      <p><strong>sessionStorage:</strong> <span id="sessionStorageInfo">—</span></p>
+      <p id="statusMsg" style="color: green; font-weight: bold;"></p>
+    </div>
+  </div>
+
+  <script>
+    // On page load: retrieve saved preference from localStorage
+    window.onload = function () {
+      const saved = localStorage.getItem('preferredEvent');
+      if (saved) {
+        document.getElementById('eventPref').value = saved;
+        document.getElementById('localStorageInfo').textContent = `Saved preference: "${saved}"`;
+        document.getElementById('statusMsg').textContent = `✅ Welcome back! Your saved preference "${saved}" has been loaded.`;
+      } else {
+        document.getElementById('localStorageInfo').textContent = 'No preference saved yet.';
+      }
+
+      const session = sessionStorage.getItem('sessionVisit');
+      if (session) {
+        document.getElementById('sessionStorageInfo').textContent = `Session active since: ${session}`;
+      } else {
+        const now = new Date().toLocaleTimeString();
+        sessionStorage.setItem('sessionVisit', now);
+        document.getElementById('sessionStorageInfo').textContent = `Session started at: ${now}`;
+      }
+    };
+
+    // Save selected event type to localStorage
+    function savePreference() {
+      const pref = document.getElementById('eventPref').value;
+      if (!pref) return;
+      localStorage.setItem('preferredEvent', pref);
+      document.getElementById('localStorageInfo').textContent = `Saved preference: "${pref}"`;
+      document.getElementById('statusMsg').textContent = `✅ Preference "${pref}" saved! It will be remembered next time.`;
+    }
+
+    // Clear both localStorage and sessionStorage
+    function clearPreferences() {
+      localStorage.clear();
+      sessionStorage.clear();
+      document.getElementById('eventPref').value = '';
+      document.getElementById('localStorageInfo').textContent = 'Cleared.';
+      document.getElementById('sessionStorageInfo').textContent = 'Cleared.';
+      document.getElementById('statusMsg').textContent = '🗑️ All preferences and session data cleared.';
+      document.getElementById('statusMsg').style.color = 'red';
+    }
+  </script>
+
+</body>
+</html>

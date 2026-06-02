@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Positioning - Community Portal</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body class="bg-light" style="padding-bottom: 80px;">
+
+  <div class="container py-4">
+    <h2 class="fw-bold mb-4">Exercise 16: Positioning Utilities</h2>
+
+    <!-- 16.2: position-relative + position-absolute badge over image -->
+    <h5 class="text-muted mb-3">16.2 — position-relative + position-absolute (Badge over Image)</h5>
+    <div class="d-flex flex-wrap gap-4 mb-4">
+
+      <div class="position-relative d-inline-block">
+        <img src="https://via.placeholder.com/200x150/3498db/white?text=Music+Festival"
+             class="rounded shadow-sm" style="width:200px;height:150px;display:block;" alt="Event">
+        <span class="position-absolute top-0 start-0 badge bg-danger m-2">LIVE</span>
+        <span class="position-absolute bottom-0 end-0 badge bg-dark m-2">June 15</span>
+      </div>
+
+      <div class="position-relative d-inline-block">
+        <img src="https://via.placeholder.com/200x150/27ae60/white?text=Tech+Meetup"
+             class="rounded shadow-sm" style="width:200px;height:150px;display:block;" alt="Event">
+        <span class="position-absolute top-0 end-0 badge bg-warning text-dark m-2">FREE</span>
+        <span class="position-absolute bottom-0 start-0 badge bg-primary m-2">💻 Tech</span>
+      </div>
+
+    </div>
+
+    <div class="alert alert-info">
+      <strong>Note on Fixed Footer below:</strong> The footer uses <code>position-fixed bottom-0 start-0 end-0</code> — it stays fixed at the bottom of the viewport as you scroll.
+    </div>
+  </div>
+
+  <!-- 16.1: Fixed footer using position-fixed bottom-0 -->
+  <footer class="position-fixed bottom-0 start-0 end-0 bg-dark text-white text-center py-2">
+    📍 Fixed Footer — position-fixed bottom-0 | Community Event Portal © 2025
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

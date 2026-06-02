@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Multi-Column Layout - Community Portal</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: Georgia, serif; background: #fdf6e3; padding: 25px; color: #333; }
+
+    h1 { text-align: center; color: #2c3e50; margin-bottom: 5px; font-size: 28px; }
+    .edition { text-align: center; color: #888; font-size: 13px; margin-bottom: 20px; border-bottom: 2px solid #2c3e50; padding-bottom: 10px; }
+
+    /* Newspaper-style multi-column layout */
+    .news-article {
+      column-count: 2;
+      column-gap: 30px;
+      column-rule: 1px solid gray;
+      background: white;
+      padding: 25px;
+      border-radius: 6px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+      margin-bottom: 20px;
+    }
+
+    .news-article h2 {
+      column-span: all;          /* Heading spans all columns */
+      color: #2c3e50;
+      font-size: 20px;
+      margin-bottom: 15px;
+      border-bottom: 1px solid #eee;
+      padding-bottom: 8px;
+    }
+
+    .news-article p {
+      font-size: 14px;
+      line-height: 1.8;
+      text-align: justify;
+      margin-bottom: 10px;
+    }
+
+    /* 3-column for shorter bulletin */
+    .bulletin {
+      column-count: 3;
+      column-gap: 25px;
+      column-rule: 1px dashed #ccc;
+      background: white;
+      padding: 20px;
+      border-radius: 6px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+    }
+
+    .bulletin h3 { column-span: all; color: #2980b9; margin-bottom: 12px; }
+    .bulletin p  { font-size: 13px; line-height: 1.7; margin-bottom: 8px; }
+  </style>
+</head>
+<body>
+
+  <h1>📰 Community Bulletin</h1>
+  <p class="edition">Vol. 12 | June 2025 Edition</p>
+
+  <!-- 2-column article -->
+  <div class="news-article">
+    <h2>🎵 Annual Music Festival Returns to City Park</h2>
+    <p>
+      After a two-year hiatus, the beloved Community Music Festival is making a spectacular
+      comeback this summer at City Park Amphitheater. Organizers have lined up over 20 local
+      and regional bands to perform across two stages.
+    </p>
+    <p>
+      The festival will feature food stalls from local restaurants, artisan craft booths,
+      and a dedicated kids' zone with activities for children of all ages. Entry is free
+      for children under 12, and tickets for adults are priced affordably at just ₹200.
+    </p>
+    <p>
+      Volunteers are also being sought to help manage the event. Interested residents can
+      sign up through the Community Portal or visit the city council office before June 10th.
+    </p>
+    <p>
+      "We are thrilled to bring the community together again through the power of music,"
+      said event organizer Priya Sharma. "This year will be the biggest festival we've
+      ever organized, and we can't wait to share it with everyone."
+    </p>
+  </div>
+
+  <!-- 3-column bulletin -->
+  <div class="bulletin">
+    <h3>📌 Quick Community Updates</h3>
+    <p>🏥 <strong>Free health checkup camp</strong> on June 8 at Community Hall. All residents welcome.</p>
+    <p>📚 <strong>Library reading week</strong> starts June 12. Children's storytelling sessions daily at 4 PM.</p>
+    <p>🌳 <strong>Tree plantation drive</strong> on June 20. Meet at the park entrance at 7 AM.</p>
+  </div>
+
+</body>
+</html>

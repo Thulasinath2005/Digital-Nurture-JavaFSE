@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Data Types - Community Portal</title>
+  <style>
+    body { font-family: Arial, sans-serif; padding: 20px; background: #f0f4f8; }
+    .container { background: white; padding: 25px; border-radius: 8px; max-width: 550px; margin: 0 auto; }
+    h2 { color: #2c3e50; margin-bottom: 15px; }
+    .info { background: #eaf6ff; padding: 12px; border-radius: 5px; margin: 10px 0; font-size: 14px; }
+    button { padding: 10px 20px; background: #2980b9; color: white; border: none; border-radius: 5px; cursor: pointer; margin-top: 10px; }
+    #seatDisplay { font-size: 20px; font-weight: bold; color: #e74c3c; margin: 10px 0; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2>Exercise 2: Data Types & Operators</h2>
+
+    <div class="info" id="eventInfo"></div>
+
+    <p>Available Seats: <span id="seatDisplay">0</span></p>
+    <button onclick="registerSeat()">➕ Register (seats--)</button>
+    <button onclick="cancelSeat()">➖ Cancel (seats++)</button>
+  </div>
+
+  <script>
+    // const for event name and date (immutable)
+    const eventName = "Tech Innovation Meetup";
+    const eventDate = "2025-06-22";
+
+    // let for seats (mutable)
+    let availableSeats = 50;
+
+    // Template literal to concatenate event info
+    const eventInfo = `📅 Event: ${eventName} | Date: ${eventDate} | Seats Available: ${availableSeats}`;
+    document.getElementById('eventInfo').textContent = eventInfo;
+    document.getElementById('seatDisplay').textContent = availableSeats;
+
+    function registerSeat() {
+      if (availableSeats > 0) {
+        availableSeats--;   // decrement operator
+        document.getElementById('seatDisplay').textContent = availableSeats;
+      } else {
+        alert("No seats available!");
+      }
+    }
+
+    function cancelSeat() {
+      availableSeats++;   // increment operator
+      document.getElementById('seatDisplay').textContent = availableSeats;
+    }
+  </script>
+</body>
+</html>

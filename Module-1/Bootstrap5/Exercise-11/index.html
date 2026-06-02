@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cards - Community Portal</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body class="bg-light py-4">
+  <div class="container">
+    <h2 class="fw-bold mb-4">Exercise 11: Cards & Media Objects</h2>
+
+    <!-- 11.1: Profile Card -->
+    <h5 class="text-muted mb-3">11.1 — Profile Card</h5>
+    <div class="row g-3 mb-4">
+      <div class="col-md-4">
+        <div class="card shadow-sm text-center">
+          <img src="https://via.placeholder.com/300x180/3498db/white?text=Music+Festival"
+               class="card-img-top" alt="Music Festival">
+          <div class="card-body">
+            <h5 class="card-title">🎵 Music Festival</h5>
+            <p class="card-text text-muted small">June 15, 2025 — City Park</p>
+            <p class="card-text">An evening of live music, food and community fun.</p>
+            <a href="#" class="btn btn-primary btn-sm">Register</a>
+            <a href="#" class="btn btn-outline-secondary btn-sm">Learn More</a>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="card shadow-sm text-center">
+          <img src="https://via.placeholder.com/300x180/27ae60/white?text=Tech+Meetup"
+               class="card-img-top" alt="Tech Meetup">
+          <div class="card-body">
+            <h5 class="card-title">💻 Tech Meetup</h5>
+            <p class="card-text text-muted small">June 22, 2025 — Innovation Hub</p>
+            <p class="card-text">Connect with local developers and designers.</p>
+            <span class="badge bg-success mb-2">Free Entry</span><br>
+            <a href="#" class="btn btn-success btn-sm">Register</a>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="card shadow-sm text-center">
+          <img src="https://via.placeholder.com/300x180/e74c3c/white?text=Art+Exhibition"
+               class="card-img-top" alt="Art Exhibition">
+          <div class="card-body">
+            <h5 class="card-title">🎨 Art Exhibition</h5>
+            <p class="card-text text-muted small">July 5, 2025 — Gallery One</p>
+            <p class="card-text">Explore paintings, sculptures and installations.</p>
+            <a href="#" class="btn btn-danger btn-sm">Register</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 11.2: Media Object layout -->
+    <h5 class="text-muted mb-3">11.2 — Media Object Layout (image left of content)</h5>
+    <div class="card shadow-sm mb-3">
+      <div class="card-body d-flex gap-3 align-items-start">
+        <img src="https://via.placeholder.com/80x80/2980b9/white?text=IMG"
+             class="rounded" alt="Speaker" style="width:80px;height:80px;object-fit:cover;">
+        <div>
+          <h5 class="mb-1">Dr. Alice Johnson</h5>
+          <p class="text-muted small mb-1">Speaker — AI & Machine Learning</p>
+          <p class="mb-0 small">Dr. Johnson is a leading researcher in AI applications for healthcare. She will present at the Tech Meetup on June 22.</p>
+        </div>
+      </div>
+    </div>
+
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

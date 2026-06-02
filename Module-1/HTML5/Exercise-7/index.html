@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Event Video Invite - Community Portal</title>
+  <style>
+    body { font-family: Arial, sans-serif; background: #1a1a2e; color: white; padding: 30px; text-align: center; }
+    h2 { color: #e94560; }
+    .video-container { max-width: 640px; margin: 20px auto; }
+    video { width: 100%; border-radius: 10px; border: 3px solid #e94560; }
+    #videoStatus {
+      margin-top: 15px; padding: 12px;
+      background: #16213e; border-radius: 8px;
+      border-left: 4px solid #e94560;
+      font-size: 15px; color: #eee;
+    }
+    .form-section {
+      max-width: 500px; margin: 30px auto;
+      background: #16213e; padding: 25px; border-radius: 10px;
+    }
+    input { width: 100%; padding: 10px; margin-top: 10px; box-sizing: border-box; border-radius: 5px; border: none; }
+    button { margin-top: 15px; padding: 12px 30px; background: #e94560; color: white; border: none; border-radius: 5px; cursor: pointer; font-size: 15px; }
+  </style>
+</head>
+<body>
+
+  <h2>🎬 Event Promo Video</h2>
+  <p>Watch the highlight reel from our last community event!</p>
+
+  <div class="video-container">
+    <!-- Video element with controls and media events -->
+    <video id="promoVideo"
+           controls
+           oncanplay="videoReady()"
+           onplay="videoPlaying()"
+           onpause="videoPaused()"
+           onended="videoEnded()">
+      <!-- Use a public sample video -->
+      <source src="https://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4">
+      Your browser does not support the video element.
+    </video>
+
+    <div id="videoStatus">⏳ Loading video, please wait...</div>
+  </div>
+
+  <!-- Form with onbeforeunload warning -->
+  <div class="form-section">
+    <h3>📝 Register for Next Event</h3>
+    <input type="text" id="regName" placeholder="Your name" oninput="formDirty()">
+    <input type="email" id="regEmail" placeholder="Your email" oninput="formDirty()">
+    <button onclick="submitReg()">Register</button>
+  </div>
+
+  <script>
+    let isFormDirty = false;
+
+    function videoReady() {
+      document.getElementById('videoStatus').textContent = '✅ Video ready to play! Click the play button to watch.';
+    }
+    function videoPlaying() {
+      document.getElementById('videoStatus').textContent = '▶️ Video is now playing...';
+    }
+    function videoPaused() {
+      document.getElementById('videoStatus').textContent = '⏸️ Video paused. Click play to resume.';
+    }
+    function videoEnded() {
+      document.getElementById('videoStatus').textContent = '🎉 Video ended! We hope you enjoyed it.';
+    }
+
+    // Track form changes
+    function formDirty() {
+      isFormDirty = true;
+    }
+
+    // onbeforeunload: warn if form has unsaved data
+    window.onbeforeunload = function () {
+      if (isFormDirty) {
+        return 'You have unsaved registration details. Are you sure you want to leave?';
+      }
+    };
+
+    function submitReg() {
+      isFormDirty = false;
+      alert('✅ Registration submitted successfully!');
+    }
+  </script>
+
+</body>
+</html>

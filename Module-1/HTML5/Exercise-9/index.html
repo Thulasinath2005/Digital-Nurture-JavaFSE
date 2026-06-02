@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Find Nearby Events - Community Portal</title>
+  <style>
+    body { font-family: Arial, sans-serif; background: #f0f4f8; padding: 30px; text-align: center; }
+    .container { max-width: 500px; margin: 0 auto; background: white; padding: 30px; border-radius: 10px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); }
+    h2 { color: #2c3e50; }
+    button {
+      padding: 14px 30px; background: #2980b9; color: white;
+      border: none; border-radius: 8px; font-size: 16px; cursor: pointer; margin-top: 15px;
+    }
+    button:hover { background: #1a5276; }
+    #locationResult {
+      margin-top: 25px; padding: 20px; background: #eaf6ff;
+      border-radius: 8px; border-left: 4px solid #2980b9; text-align: left;
+    }
+    #locationResult.error { background: #fdecea; border-left-color: #e74c3c; }
+    .coord { font-size: 18px; font-weight: bold; color: #2c3e50; }
+    .nearby-events { margin-top: 15px; }
+    .event-item { padding: 8px; background: #d5f5e3; margin: 5px 0; border-radius: 5px; }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <h2>📍 Find Nearby Events</h2>
+    <p>Click the button below to locate your position and find community events near you.</p>
+
+    <button onclick="findNearbyEvents()">📡 Find Nearby Events</button>
+    <button onclick="stopLocating()" style="background:#e74c3c; margin-left:10px;" id="stopBtn" disabled>
+      ⛔ Stop
+    </button>
+
+    <div id="locationResult" style="display:none;"></div>
+  </div>
+
+  <script>
+    let watchId = null;
+
+    function findNearbyEvents() {
+      const resultDiv = document.getElementById('locationResult');
+      resultDiv.style.display = 'block';
+      resultDiv.className = '';
+      resultDiv.innerHTML = '⏳ Fetching your location with high accuracy...';
+      document.getElementById('stopBtn').disabled = false;
+
+      if (!navigator.geolocation) {
+        resultDiv.className = 'error';
+        resultDiv.innerHTML = '❌ Geolocation is not supported by your browser.';
+        return;
+      }
+
+      const options = {
+        enableHighAccuracy: true,   // High accuracy mode
+        timeout: 10000,             // Timeout after 10 seconds
+        maximumAge: 0               // No cached position
+      };
+
+      watchId = navigator.geolocation.getCurrentPosition(
+        successCallback,
+        errorCallback,
+        options
+      );
+    }
+
+    function successCallback(position) {
+      const lat = position.coords.latitude.toFixed(6);
+      const lon = position.coords.longitude.toFixed(6);
+      const accuracy = position.coords.accuracy.toFixed(0);
+
+      const resultDiv = document.getElementById('locationResult');
+      resultDiv.innerHTML = `
+        <p>✅ <strong>Location Found!</strong></p>
+        <p class="coord">📍 Latitude: ${lat}</p>
+        <p class="coord">📍 Longitude: ${lon}</p>
+        <p>🎯 Accuracy: ±${accuracy} meters</p>
+        <p><a href="https://maps.google.com/?q=${lat},${lon}" target="_blank">🗺️ View on Google Maps</a></p>
+        <div class="nearby-events">
+          <strong>🎉 Nearby Events Found:</strong>
+          <div class="event-item">🎵 Music Festival — 1.2 km away</div>
+          <div class="event-item">💻 Tech Meetup — 2.5 km away</div>
+          <div class="event-item">🎨 Art Workshop — 3.1 km away</div>
+        </div>
+      `;
+      document.getElementById('stopBtn').disabled = true;
+    }
+
+    function errorCallback(error) {
+      const resultDiv = document.getElementById('locationResult');
+      resultDiv.className = 'error';
+      let message = '';
+
+      switch (error.code) {
+        case error.PERMISSION_DENIED:
+          message = '❌ Permission denied. Please allow location access in your browser settings.';
+          break;
+        case error.POSITION_UNAVAILABLE:
+          message = '❌ Location information is unavailable at this time.';
+          break;
+        case error.TIMEOUT:
+          message = '⏰ Request timed out. Please try again.';
+          break;
+        default:
+          message = '❌ An unknown error occurred.';
+      }
+
+      resultDiv.innerHTML = message;
+      document.getElementById('stopBtn').disabled = true;
+    }
+
+    function stopLocating() {
+      if (watchId !== null) {
+        navigator.geolocation.clearWatch(watchId);
+        watchId = null;
+      }
+      document.getElementById('stopBtn').disabled = true;
+      document.getElementById('locationResult').innerHTML += '<br>⛔ Location tracking stopped.';
+    }
+  </script>
+
+</body>
+</html>

@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Functions & Closures - Community Portal</title>
+  <style>
+    body { font-family: Arial, sans-serif; padding: 20px; background: #f0f4f8; }
+    .container { background: white; padding: 25px; border-radius: 8px; max-width: 600px; margin: 0 auto; }
+    h2 { color: #2c3e50; }
+    input, select { padding: 8px; border: 1px solid #ccc; border-radius: 5px; margin: 5px; }
+    button { padding: 8px 18px; background: #2980b9; color: white; border: none; border-radius: 5px; cursor: pointer; margin: 5px; }
+    .result { background: #eaf6ff; padding: 12px; border-radius: 5px; margin: 10px 0; font-size: 14px; }
+    .event-item { padding: 8px; background: #f9f9f9; margin: 5px 0; border-radius: 5px; border-left: 3px solid #2980b9; }
+    h3 { color: #2980b9; margin-top: 20px; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2>Exercise 4: Functions, Closures & Higher-Order Functions</h2>
+
+    <!-- Add Event -->
+    <h3>➕ Add Event</h3>
+    <input type="text" id="newName" placeholder="Event name">
+    <select id="newCategory">
+      <option value="Music">Music</option>
+      <option value="Tech">Tech</option>
+      <option value="Art">Art</option>
+      <option value="Food">Food</option>
+    </select>
+    <button onclick="addEvent()">Add Event</button>
+
+    <!-- Filter -->
+    <h3>🔍 Filter by Category</h3>
+    <select id="filterCategory" onchange="filterEventsByCategory(this.value)">
+      <option value="All">All</option>
+      <option value="Music">Music</option>
+      <option value="Tech">Tech</option>
+      <option value="Art">Art</option>
+      <option value="Food">Food</option>
+    </select>
+
+    <div id="eventList"></div>
+
+    <!-- Closure: registration tracker -->
+    <h3>📊 Registration Counter (Closure)</h3>
+    <button onclick="registerUser('Music')">Register for Music</button>
+    <button onclick="registerUser('Tech')">Register for Tech</button>
+    <div class="result" id="regCount"></div>
+  </div>
+
+  <script>
+    let events = [
+      { name: "Music Festival", category: "Music" },
+      { name: "Tech Meetup",    category: "Tech"  },
+      { name: "Art Exhibition", category: "Art"   },
+    ];
+
+    // Function: addEvent
+    function addEvent() {
+      const name = document.getElementById('newName').value.trim();
+      const category = document.getElementById('newCategory').value;
+      if (!name) return alert("Please enter an event name.");
+      events.push({ name, category });
+      renderEvents(events);
+    }
+
+    // Function: filterEventsByCategory — uses callback (higher-order)
+    function filterEventsByCategory(category) {
+      const filtered = category === "All"
+        ? events
+        : events.filter(e => e.category === category);  // callback to filter
+      renderEvents(filtered);
+    }
+
+    // Render events list
+    function renderEvents(list) {
+      const container = document.getElementById('eventList');
+      container.innerHTML = list.map(e =>
+        `<div class="event-item">📌 <strong>${e.name}</strong> — ${e.category}</div>`
+      ).join('');
+    }
+
+    // Closure: tracks registrations per category
+    function createCategoryCounter() {
+      const counts = {};       // enclosed in closure
+      return function (category) {
+        counts[category] = (counts[category] || 0) + 1;
+        return counts;
+      };
+    }
+
+    const trackRegistration = createCategoryCounter();
+
+    function registerUser(category) {
+      const counts = trackRegistration(category);
+      const summary = Object.entries(counts)
+        .map(([cat, cnt]) => `${cat}: ${cnt}`)
+        .join(' | ');
+      document.getElementById('regCount').textContent = `Registrations → ${summary}`;
+    }
+
+    // Initial render
+    renderEvents(events);
+  </script>
+</body>
+</html>

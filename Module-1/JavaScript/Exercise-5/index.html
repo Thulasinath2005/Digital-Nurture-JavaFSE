@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Objects & Prototypes - Community Portal</title>
+  <style>
+    body { font-family: Arial, sans-serif; padding: 20px; background: #f0f4f8; }
+    .container { background: white; padding: 25px; border-radius: 8px; max-width: 600px; margin: 0 auto; }
+    h2 { color: #2c3e50; }
+    .card { background: #eaf6ff; padding: 15px; border-radius: 8px; margin: 10px 0; }
+    button { padding: 8px 16px; background: #2980b9; color: white; border: none; border-radius: 5px; cursor: pointer; margin: 5px; }
+    #output { background: #f9f9f9; padding: 12px; border-radius: 5px; margin-top: 10px; font-size: 14px; white-space: pre-wrap; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2>Exercise 5: Objects & Prototypes</h2>
+    <button onclick="showEventDetails()">Show Event Details</button>
+    <button onclick="checkAvail()">Check Availability</button>
+    <button onclick="listKeys()">List Object Keys & Values</button>
+    <div id="output">Click a button to see output...</div>
+  </div>
+
+  <script>
+    // Event constructor
+    function Event(name, category, date, seats) {
+      this.name = name;
+      this.category = category;
+      this.date = date;
+      this.seats = seats;
+    }
+
+    // Method on prototype
+    Event.prototype.checkAvailability = function () {
+      return this.seats > 0
+        ? `✅ ${this.name} has ${this.seats} seats available.`
+        : `❌ ${this.name} is fully booked.`;
+    };
+
+    Event.prototype.displayDetails = function () {
+      return `📌 ${this.name} | Category: ${this.category} | Date: ${this.date} | Seats: ${this.seats}`;
+    };
+
+    const event1 = new Event("Music Festival", "Music", "June 15", 20);
+    const event2 = new Event("Tech Meetup",    "Tech",  "June 22", 0);
+
+    function showEventDetails() {
+      document.getElementById('output').textContent =
+        event1.displayDetails() + "\n" + event2.displayDetails();
+    }
+
+    function checkAvail() {
+      document.getElementById('output').textContent =
+        event1.checkAvailability() + "\n" + event2.checkAvailability();
+    }
+
+    function listKeys() {
+      const entries = Object.entries(event1)
+        .map(([key, val]) => `  ${key}: ${val}`)
+        .join("\n");
+      document.getElementById('output').textContent = "Object.entries(event1):\n" + entries;
+    }
+  </script>
+</body>
+</html>

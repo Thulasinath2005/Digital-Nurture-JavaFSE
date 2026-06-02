@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CSS Selectors - Community Portal</title>
+  <style>
+    
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      background: #f0f4f8;
+      padding: 20px;
+    }
+
+    /
+    h2 {
+      color: #2980b9;
+      margin-bottom: 10px;
+      border-bottom: 2px solid #2980b9;
+      padding-bottom: 5px;
+    }
+
+    
+    #mainHeader {
+      background: #2c3e50;
+      color: white;
+      padding: 25px;
+      text-align: center;
+      border-radius: 8px;
+      margin-bottom: 20px;
+    }
+
+    
+    .eventCard {
+      background: white;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      padding: 20px;
+      margin: 15px 0;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    }
+
+    
+    h3, p {
+      line-height: 1.6;
+      margin-bottom: 8px;
+    }
+
+    h3 { color: #2c3e50; font-size: 18px; }
+    p { color: #555; font-size: 14px; }
+
+    .tag {
+      display: inline-block;
+      background: #3498db;
+      color: white;
+      padding: 3px 10px;
+      border-radius: 12px;
+      font-size: 12px;
+      margin-right: 5px;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ID selector target -->
+  <div id="mainHeader">
+    <h1>Community Event Portal</h1>
+    <p>Styled with CSS Selectors</p>
+  </div>
+
+  <h2>Upcoming Events</h2>
+
+  <!-- Class selector targets -->
+  <div class="eventCard">
+    <h3>🎵 Music Festival</h3>
+    <p>Join us for a night of live music, food stalls, and community fun.</p>
+    <span class="tag">Music</span>
+    <span class="tag">June 15</span>
+  </div>
+
+  <div class="eventCard">
+    <h3>💻 Tech Meetup</h3>
+    <p>Connect with local developers, designers, and tech enthusiasts.</p>
+    <span class="tag">Technology</span>
+    <span class="tag">June 22</span>
+  </div>
+
+  <div class="eventCard">
+    <h3>🎨 Art Exhibition</h3>
+    <p>Explore creativity through paintings, sculptures, and installations.</p>
+    <span class="tag">Art</span>
+    <span class="tag">July 5</span>
+  </div>
+
+</body>
+</html>

@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Events Admin Table - Community Portal</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: Arial, sans-serif; background: #f0f4f8; padding: 25px; }
+
+    h2 { color: #2c3e50; margin-bottom: 15px; }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;   /* Remove double borders */
+      background: white;
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+    }
+
+    th {
+      background-color: #2c3e50;
+      color: white;
+      padding: 14px;
+      text-align: center;          /* Center-align headers */
+      font-size: 14px;
+      letter-spacing: 0.5px;
+    }
+
+    td {
+      padding: 12px 14px;
+      text-align: center;
+      color: #444;
+      font-size: 14px;
+      border-bottom: 1px solid #eee;
+    }
+
+    /* Zebra striping with nth-child */
+    tr:nth-child(even) {
+      background-color: #ecf0f1;
+    }
+
+    tr:hover {
+      background-color: #d6eaf8;
+      cursor: pointer;
+    }
+
+    /* Status badge styling */
+    .badge {
+      display: inline-block;
+      padding: 4px 10px;
+      border-radius: 12px;
+      font-size: 12px;
+      font-weight: bold;
+    }
+    .upcoming  { background: #d5f5e3; color: #1e8449; }
+    .completed { background: #d6eaf8; color: #1a5276; }
+    .cancelled { background: #fadbd8; color: #922b21; }
+  </style>
+</head>
+<body>
+
+  <h2>📋 Events Administration Table</h2>
+
+  <table>
+    <thead>
+      <tr>
+        <th>#</th>
+        <th>Event Name</th>
+        <th>City</th>
+        <th>Date</th>
+        <th>Registrations</th>
+        <th>Status</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>1</td>
+        <td>🎵 Music Festival</td>
+        <td>New York</td>
+        <td>June 15, 2025</td>
+        <td>142</td>
+        <td><span class="badge upcoming">Upcoming</span></td>
+      </tr>
+      <tr>
+        <td>2</td>
+        <td>💻 Tech Meetup</td>
+        <td>Chicago</td>
+        <td>May 15, 2025</td>
+        <td>89</td>
+        <td><span class="badge completed">Completed</span></td>
+      </tr>
+      <tr>
+        <td>3</td>
+        <td>🎨 Art Exhibition</td>
+        <td>Los Angeles</td>
+        <td>July 5, 2025</td>
+        <td>60</td>
+        <td><span class="badge upcoming">Upcoming</span></td>
+      </tr>
+      <tr>
+        <td>4</td>
+        <td>🍕 Food Fair</td>
+        <td>Houston</td>
+        <td>April 10, 2025</td>
+        <td>200</td>
+        <td><span class="badge completed">Completed</span></td>
+      </tr>
+      <tr>
+        <td>5</td>
+        <td>⚽ Sports Day</td>
+        <td>Phoenix</td>
+        <td>March 5, 2025</td>
+        <td>15</td>
+        <td><span class="badge cancelled">Cancelled</span></td>
+      </tr>
+    </tbody>
+  </table>
+
+</body>
+</html>
